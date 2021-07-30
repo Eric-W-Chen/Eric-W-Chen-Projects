@@ -1,4 +1,4 @@
-# Project 1: System Inspector
+# System Inspector
 
 Author: Eric Chen
 
