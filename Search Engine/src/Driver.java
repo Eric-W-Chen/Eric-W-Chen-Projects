@@ -12,7 +12,6 @@ import org.eclipse.jetty.servlet.ServletHolder;
  *
  * @author CS 212 Software Development
  * @author University of San Francisco
- * @version Fall 2019
  */
 public class Driver {
 
