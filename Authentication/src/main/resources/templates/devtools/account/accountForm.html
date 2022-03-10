@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>Create User</title>
+</head>
+<body>
+	<h1 style="color: red;">Development Tool. Not for final release!</h1>
+	<h2>Create User</h2>
+
+	<form action="#" th:action="@{/devtools/api/createaccount}"
+		th:object="${user}" method="post" commandName="cmd">
+
+		<div>
+			<input type="text" name="username" placeholder="Username"
+				th:field="*{username}" />
+		</div>
+		<div>
+			<input type="password" name="password" placeholder="Password"
+				th:field="*{password}" />
+		</div>
+		<div>
+			<input type="text" name="fName" placeholder="first name"
+				th:field="*{fName}" />
+		</div>
+		<div>
+			<input type="text" name="lName" placeholder="last name"
+				th:field="*{lName}" />
+		</div>
+		<div>
+			<input type="text" name="email" placeholder="Email"
+				th:field="*{email}" />
+		</div>
+		<div>
+			<h4>Role</h4>
+			<div class="form-group">
+
+				<select name="Role" th:field="*{role}">
+					<option
+						th:each="role : ${T(com.authentication.util.Role).values()}"
+						th:value="${role}" th:text="${role}"></option>
+				</select>
+			</div>
+		</div>
+
+		<input type="submit" value="Submit" />
+
+	</form>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	
+	<!--  Bootstrap css -->
+	<link
+		href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+		rel="stylesheet"
+		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+		crossorigin="anonymous">
+		
+	
+	<title>Edit Employee</title>
+
+</head>
+
+<body>
+	<header style="margin-bottom: 20px">
+		<!-- Fixed navbar -->
+		<nav class="navbar navbar-expand-lg navbar-light static-top"
+			style="background-color: #e3f2fd;">
+			<div class="container-fluid">
+				<button class="navbar-toggler" type="button"
+					data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
+					aria-controls="navbarTogglerDemo01" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbar-collapse-1">
+					<a class="navbar-brand" href="./"><img
+						src="https://iconape.com/wp-content/files/fw/47068/svg/capgemini-logo-2017.svg"
+						alt="Capgemini Logo" width="250px" height="80px"
+						class="d-inline-block align-text-top"></a>
+
+					<ul class="navbar-nav ms-auto">
+						<li class="nav-item"><a
+							class="nav-link btn btn-light fw-bolder" href="./help"
+							role="button">Help<span
+								style="padding-left: 10px; padding-right: 20px"
+								class="bi-question-circle"></span></a></li>
+						<li class="nav-item"><a
+							class="nav-link btn btn-primary fw-bolder" th:href="@{/logout}"
+							role="button">Log-out<span style="padding-left: 10px"
+								class="bi-question-circle"></span></a></li>
+					</ul>
+
+				</div>
+			</div>
+		</nav>
+	</header>
+
+	<div class="container border" style="width: 70%; padding: 20px;">
+
+
+		<div class="bg-light text-center">
+			<h4 th:text="|You are editing ${user.username}|"></h4>
+		</div>
+
+		<form th:action="@{|/user/update?id=${user.id}|}" th:object="${user}"
+			method="post">
+			<div class="row">
+				<div class="form group col-md-6">
+					<label for="first name" class="form-label">First Name</label> <input
+						type="text" class="form-control my-2" th:field="*{fName}"
+						th:placeholder="${user.fName}" />
+				</div>
+				<div class=" form group col-md-6">
+					<label for="last name" class="form-label">Last Name</label> <input
+						type="text" class="form-control my-2"
+						th:placeholder="${user.lName}" th:field="*{lName}" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="form group col-md-6">
+					<label for="username" class="form-label">Username</label> <input
+						type="text" class="form-control my-2"
+						th:placeholder="${user.username}" th:field="*{username}" />
+				</div>
+
+
+				<!-- Editing role depends on the current role of the logged in user
+				For simplicity, also admin can edit the roles-->
+				<div class=" form group col-md-6">
+					<label for="role" class="form-label">Role</label>
+
+					<!-- IF ADMIN IS USING THIS FORM -->
+					<div th:if="${loggedInUserRole == 'ADMINISTRATOR'}">
+						<select class="form-select form-control my-2"
+							aria-label="Default select example" name="Role"
+							th:field="*{role}">
+							<option
+								th:each="role : ${T(com.authentication.util.Role).values()}"
+								th:value="${role}" th:text="${role}"></option>
+						</select>
+					</div>
+					<!-- ELSE IF MANAGER IS USING THIS FORM-->
+					<div th:if="${loggedInUserRole == 'MANAGER'}">
+						<input type="text" class="form-control my-2" disabled
+							th:placeholder="${user.role}" />
+					</div>
+					<!-- ELSE IF USER IS USING THIS FORM-->
+					<div th:if="${loggedInUserRole == 'USER'}">
+						<input type="text" class="form-control my-2" disabled
+							th:placeholder="${user.role}" />
+					</div>
+				</div>
+
+			</div>
+			<div class="row">
+				<div class=" form group col-md-12">
+					<label for="email" class="form-label">Email</label> <input
+						type="text" class="form-control my-2"
+						th:placeholder="${user.email}" th:field="*{email}" />
+				</div>
+			</div>
+
+			<div class="d-flex justify-content-center" style="padding-top: 10px">
+				<a class="btn btn-outline-info" th:href="@{/accessroles}"
+					style="margin-right: 5px">Cancel</a>
+				<button class="btn btn-outline-success" type="submit" value="Submit">Save Changes</button> 
+			</div>
+		</form>
+	</div>
+
+</body>
+
+</html>

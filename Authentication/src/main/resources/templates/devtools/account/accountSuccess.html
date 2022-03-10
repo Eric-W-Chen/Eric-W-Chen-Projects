@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <head>
+        <title>Create Account</title>
+    </head>
+    <body>
+        <h1 style="color:red;">Development Tool. Not for final release!</h1>
+        <h2 style="color:green;">Success</h2>
+        <p th:text="'username = ' + ${user.username}"/>
+        <p th:text="'first name = ' + ${user.fName}"/>
+        <p th:text="'last name = ' + ${user.lName}"/>
+        <p th:text="'email = ' + ${user.email}"/>
+        <p th:text="'role = ' + ${user.role}"/>
+        
+        <a href="/devtools/createaccount"> Create Another</a>
+
+    </body>
+</html>
