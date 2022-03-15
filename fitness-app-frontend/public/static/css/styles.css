@@ -1,0 +1,7 @@
+#nprogress .bar {
+    height: 5px !important;
+}
+
+.fa-trash:hover {
+    color: blue;
+}
